@@ -1,0 +1,952 @@
+#main-container{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+#dtPopupContainer{
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    z-index: 13;
+    transform: translateY(-100%);
+}
+#dtPopupContainer>*{
+    position: absolute;
+}
+.dtPopup{
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: goldenrod;
+    color: white;
+    display: flex;
+    align-items: center;
+    box-shadow: 6px 6px 4px gray;
+    transition: all 300ms ease-in-out;
+    display: flex;
+    transform: translateY(100%);
+}
+.dtPopup>.room-logo{
+    height: 55px;
+    width: 55px;
+    position: relative;
+    margin-left: 5px;
+}
+.dtPopup>h5{
+    flex: 1;
+    text-align: center;
+    position: relative;
+    margin: 0 8px;
+}
+#dtPopupBtnC{
+    height: 100%;
+    width: 33px;
+}
+#dtPopupBtnC>*{
+    position: relative;
+    height: 33.3%;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: normal;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 300ms ease;
+}
+#dtPopupBtnC>button:hover{
+    background: black;
+    color:white;
+}
+.Counter{
+    background: white;
+    color: rgb(37, 35, 35);
+    font-size: 15px;
+    font-weight: bold;
+    pointer-events: none;
+}
+#sub-container{
+    width: 100%;
+    height: 100%;
+    transition: all 500ms ease;
+    overflow: hidden;
+    position: relative;
+}
+#home,#chat{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+#home{
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   background: white;
+}
+
+
+/*room styles begin here
+Room header */
+
+#home>header{
+    height: 120px;
+    width: 100%;
+    background-color: indigo;
+    position: relative;
+}
+#home>header>h3{
+    padding: 10px;
+    color: white;
+}
+#home>header>h1{
+    position: absolute;
+    top: 5px;
+    right: 0;
+    transform: translateX(10px)rotate(90deg);
+    color: white;
+    cursor: pointer;
+    z-index: 11;
+}
+
+/* Menu Button and Panel Container....*/
+#menuContainer{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    visibility: hidden;
+    display: flex;
+}
+#menuContainer>*{
+    flex: 1;
+}
+#menu{
+    background:rgb(27, 27, 27);
+    width: 60px;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    list-style-type: none;
+    font-weight: bold;
+    transform: translateX(100%);
+    transition: transform 500ms ease;
+}
+#menu>ul{
+    list-style-type: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#menu>ul>a{
+    text-decoration: none;
+    color: white;
+}
+#menu>ul>a>li{
+    position: relative;
+    padding: 10px 0;
+    margin: 5px 0;
+}
+#menu>ul>a>li::before{
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 5px;
+    bottom: 0;
+    border-radius: 5px;
+    background: white;
+}
+#menu>ul>a>li:hover::before{
+    background: crimson;
+}
+
+/* Home Search */
+#home-search{
+    height: 40px;
+    width:90%;
+    margin-bottom:15px;
+    margin: 0 auto 15px auto;
+    position: relative;
+}
+#home-search>*{
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 40px;
+    background-color: white;
+    border-radius: 20px;
+    border: none;
+}
+#home-search>input{
+    text-indent: 15px;
+}
+#home-search>button{
+    right: 0;
+    top: 0;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    background: url('/images/fs2.png');
+    background-size: cover;
+}
+
+
+/* Menu Switcher..*/
+#menu-switcher{
+    width: 300px;
+    position: absolute;
+    bottom: 10px;
+}
+#menu-switcher>li{
+    width: 60px;
+    float: left;
+    list-style-type: none;
+    margin: 10px 20px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    cursor: pointer;
+}
+#menu-switcher-slider{
+  position: absolute;
+  height: 5px;
+  width: 60px;
+  background: white;
+  border-radius: 2px;
+  bottom: 0;
+  left: 40px;
+  display: block;
+  transition: all 500ms ease-in-out;
+}
+#home>div{
+    position: relative;
+    width: 200%;
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    margin-top: 10px;
+    transition: all 500ms ease-in-out;
+}
+
+
+
+/*Rooms container*/
+#rooms{
+    flex: 1;
+    height: auto;
+    position: relative;
+    float: left;
+    display: flex;
+    flex-direction: column;
+}
+#after-room{
+    flex:1;
+    overflow-y: scroll;
+}
+#after-room>h4{
+    text-align: center;
+    color: rgb(32, 31, 31);
+}
+#work_late_svg{
+    width: 90%;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+
+}
+.room-tile,.new-chat-panel-results{
+    height: 70px;
+    padding: 5px;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: white;
+}
+.room-tile>*,.new-chat-panel-results>*{
+    float: left;
+}
+.room-tile{
+    display: flex;
+}
+.room-logo{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background:blue;
+}
+#after-room .room-logo{
+    box-shadow: 4px 4px crimson;
+}
+.new-chat-panel-results>.room-logo{
+    height: 40px;
+    width:40px;
+    border-radius: 10px;
+}
+.room-detail{
+    height: 100%;
+    padding: 0 20px;
+    text-align: left;
+    background: transparent;
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+}
+.room-detail>*{
+    white-space: nowrap;
+    display: block;
+    color: rgb(73, 69, 69);
+}
+.room-detail>i{
+    max-width: 156px;
+    overflow: hidden;
+    font-size: 11px;
+}
+.room-detail>h4{
+    font-style: italic;
+    font-weight: normal;
+    max-width: 170px;
+    overflow: hidden;
+    font-size: 14px;
+}
+.noOfMsg{
+    height: 20px;
+    width: 20px;
+    border: none;
+    background: rgb(11, 160, 6);
+    font-weight: bold;
+    position: absolute;
+    right: 20px;
+    border-radius:50%;
+    color: wheat;
+    box-shadow: 4px 4px 3px -2px gray;
+    transition: transform 200ms ease-in-out;
+    transform: scale(0);
+}
+
+
+/* Active Panel*/
+#active{
+   flex: 1;
+    height: auto;
+    overflow-y: scroll;
+    float: left;
+}
+#active>p{
+    text-align: center;
+    padding-top: 30px;
+    color: rgb(46, 42, 42);
+}
+.active{
+    width: auto;
+    height: 70px;
+    box-sizing: border-box;
+    margin: 5px 0;
+    display:block;
+    text-align: center;
+    background: transparent;
+    cursor: pointer;
+}
+.active>.activeLogo{
+    height: 55px;
+    width: 55px;
+    background: lightgray;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 4px 4px goldenrod;
+}
+.active>h4{
+    display: inline-block;
+    padding-left: 8px;
+    color: rgb(46, 42, 42);
+}
+@keyframes active{
+    0%{box-shadow:4px 4px goldenrod;}
+    50%{box-shadow:7px 7px goldenrod;}
+    100%{box-shadow:4px 4px goldenrod;}
+}
+
+/*New chat Button*/
+#new-chat-btn{
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    background:indigo;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 1;
+    box-shadow: -5px 5px 5px gray;
+    cursor: pointer;
+    color: white;
+    font-size: 25px;
+}
+
+
+/* Chat panel*/
+#chat>header{
+  width: 100%;
+  height: 80px;
+  background: white;
+  color: rgb(32, 31, 31);
+  box-sizing: border-box;
+  display: none;
+}
+#back{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: transparent;
+}
+#back>svg{
+    fill: rgb(75, 73, 73);   
+}
+#chat{
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f5f9;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(100%);
+    z-index: 12;
+    transition: all 300ms ease-in-out;
+}
+#chat>header>*{
+    float: left;
+    position: relative;
+    top:50%;
+    transform: translateY(-50%);
+}
+#chat>header>.room-logo{
+    height: 50px;
+    width: 50px;
+    margin: 0 0 0 10px;
+}
+#chat>header>#details{
+    padding: 0 10px;
+}
+#details::after{
+    content: '';
+    position: absolute;
+    height: 5px;
+    width: 100px;
+    background: indigo;
+    bottom: -30px;
+    left: -50px;
+}
+#chatContent{
+    width: 95%;
+    margin: auto;
+    flex: 1;
+    overflow: hidden;
+    overflow-y: scroll;
+    position: relative;
+}
+
+
+#default-cntnt{
+    height: 200px;
+    width: 200px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 20px;
+    font-style: italic;
+    background: transparent;
+    color:rgb(54, 53, 53);
+}
+#typing-popup{
+    width: 100%;
+    margin: 5px 10px;
+    font-style: italic;
+    color: rgb(61, 60, 60);
+    padding: 5 10px;
+    background: transparent;
+}
+.incoming{
+    clear: both;
+    min-width: 100px;
+    max-width: 250px;
+    float: left;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    margin: 10px 0; 
+    height: auto;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    display: block;
+    word-wrap: break-word;
+    white-space: initial;
+}
+.incoming>.room-logo{
+    width: 40px;
+    height: 40px;
+    background: goldenrod;
+    float: left;
+    margin-right: 10px;
+}
+.incoming>p{
+    clear: both;
+}
+.outgoing{
+    clear: both;
+    min-width: 100px;
+    max-width: 50%;
+    float: right;
+    padding: 10px;
+    margin: 10px 0;
+    height: auto;
+    background-color: #da5350;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    color: white;
+    display: block;
+    word-wrap: break-word;
+    white-space: initial;
+}
+.outgoing>.room-logo{
+    width: 40px;
+    height: 40px;
+    background: goldenrod;
+    float: right;
+    margin-left: 10px;
+}
+.outgoing>p{
+    clear: both;
+}
+#controllers{
+    height: 45px;
+    width:100%;
+    display: none;
+}
+#controllers>form{
+    display: flex;
+}
+#controllers>form>input{
+    height: 40px;
+    flex:1;
+    box-sizing: border-box;
+    border: 1px solid indigo;
+    box-sizing: border-box;
+}
+#controllers>form>#submit{
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    box-sizing: border-box;
+    transform: rotate(180deg);
+    background-color: indigo;
+    border:1px solid indigo;
+}
+#dtbutton{
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+#dtbutton>svg{
+    width: 100%;
+    transition: all 500ms ease;
+}
+#dtbutton:hover{
+    box-shadow: 4px 4px gray;
+}
+#dtbutton:hover svg path{
+    fill: white;
+}
+#controllers>form>button>svg{
+    width: 20px;
+    fill: white;
+}
+
+/*Canvas Work.....*/
+
+#draw{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0,1);
+    display: none;
+    z-index: 12;
+    overflow: scroll;
+}
+#draw::-webkit-scrollbar{
+    width: 10px;
+}
+#draw::-webkit-scrollbar-track{
+    background: white;
+}
+#draw::-webkit-scrollbar-thumb{
+    background: gray;
+}
+
+#canvas{
+    background: white;
+    position: relative;
+}
+#cMenuBtn{
+    height: 50px;
+    width: 50px;
+    background: rgba(32, 31, 31, 0.7);
+    position: fixed;
+    border-radius: 10px;
+    top: 100px;
+    left: 0;
+    overflow: hidden;
+    
+}
+#cMenuBtn>div>h4{
+    padding: 5px 0;
+}
+#WhiteDot{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.9);
+    margin: 5px;
+    cursor: pointer;
+}
+#chargeContainer{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: block;
+    height: 30px;
+    width: auto;
+    display: none;
+}
+#chargeContainer>*{
+    float: left;
+    height: 100%;
+    width: auto;
+    margin: 0 3px;
+    padding: 5px 10px;
+    background: crimson;
+    color: white;
+    font-weight: bold;
+    border:1px solid white;
+    cursor: pointer;
+}
+#chargeContainer>*:hover{
+    background: white;
+    color:black;
+}
+#colorContainer{
+    clear: both;
+    margin-top: 10px;
+    width: 100%;
+    color:white;
+}
+#colorContainer>div{
+    height: 25px;
+    width: 25px;
+    margin: 0 3px;
+    position: relative;
+    display: inline-block;
+}
+#colorContainer>div>input{
+    height: 25px;
+    width: 25px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+}
+#colorContainer>div>div{
+    position: absolute;
+    height: 25px;
+    width: 25px;
+    border: 2px solid white;
+    transition: all 200ms ease;
+}
+#colorContainer>div>input:checked + div{
+     transform: scale(1.1)translateY(-7px);
+}
+#sizeContainer{
+    margin: 10px 0;
+    color:white;
+}
+#strokeSize{
+    height: 10px;
+    background: white;
+    border-radius: 5px;
+    -webkit-appearance: none;
+}
+#strokeSize::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px;
+    width: 15px;
+    background: rgb(95, 7, 236);
+    border-radius: 50%;
+}
+#strokeSize::-webkit-slider-thumb:hover{
+    background: rgb(43, 5, 104);
+}
+#strokeSize::-moz-range-thumb{
+    height: 15px;
+    width: 15px;
+    background: rgb(95, 7, 236);
+    border-radius: 50%;
+}
+#strokeSize::-moz-range-thumb:hover{
+    background: rgb(43, 5, 104);
+}
+#canvasBtnContainer{
+    margin: 10px 0;
+    height: 30px;
+    width: 100%;
+}
+#canvas_close{
+    position: relative;
+    font-size: unset;
+    float: left;
+    width: 60px;
+    height: 30px;
+    box-sizing: border-box;
+    background: white;
+    color: black;
+    border: 1px solid white;
+    border-radius: 5px;
+    margin: 0 2px;
+}
+#canvasClear{
+    height: 30px;
+    width: 60px;
+    background: white;
+    color: black;
+    border: 1px solid white;
+    padding: 0;
+    float: left;
+    box-sizing: border-box;
+    border-radius: 5px;
+    position: relative;
+    margin: 0 2px;
+    font-weight: bold;
+    font-size: unset;
+}
+#canvas_close:hover,#canvasClear:hover{
+    background: black;
+    color:white;
+}
+
+
+
+#cTutorial{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background: rgba(255,255,255,.9);
+}
+#cTutorial>div{
+    width: 90%;
+    height: auto;
+    max-height: auto;
+    margin: 30px auto;
+}
+#cTutorial>div>p{
+    text-align: center;
+}
+#cTutorial>div:nth-child(1){
+    height: 80px;
+}
+#cTutorial>div:nth-child(1)>svg{
+    height: 60px;
+    margin: 0 10px;
+    float: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#cTutorial>div:nth-child(1)>p{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#cTutorial>div:nth-child(2)>svg{
+    height: 60px;
+    margin: 10px auto;
+    position: relative;
+    left:50%;
+    transform: translateX(-50%);
+}
+#cTutorial>div:nth-child(3)>svg{
+    height: 110px;
+    position: relative;
+    margin: 10px auto;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#cTutorial>div:nth-child(4)>svg{
+    height: 50px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#cTutorial>div:nth-child(5)>button{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: black;
+    color: white;
+    padding: 0 40px;
+    margin: 15px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+#drawMsg{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: rgba(255,255,255,.9);
+    color:rgb(54, 53, 53);
+    display: none;
+    z-index: 14;
+}
+.Close{
+    height: 40px;
+    width: 40px;
+    background: white;
+    color:rgb(54, 53, 53);
+    border: 2px solid rgb(54, 53, 53);
+    box-sizing: border-box;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+#drawMsg_close{
+    font-weight: normal;
+    display: none;
+}
+#drawMsg>div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+}
+#drawMsg>div>h1{
+    font-size: 50px;
+}
+#dtrequestAccept{
+    margin: 10px 0;
+    background: indigo;
+    color: white;
+    font-weight: bold;
+}
+#dtrequestAccept:hover{
+    background: black;
+}
+
+
+
+#new-chat-panel{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgba(255,255,255,1);
+    z-index: 12;
+    transform: translateX(-100%);
+    transition: transform 500ms ease-in-out;
+    overflow-y: scroll;
+}
+#new-chat-panel>header{
+    height: 40px;
+    width: 90%;
+    margin: 20px auto 0 auto;
+    display: flex;
+    border: 2px solid indigo;
+}
+#new-chat-panel>header>button{
+    height: 40px;
+    width:40px;
+    margin: 0;
+    background: indigo;
+    fill: white;
+    border: none;
+}
+#new-chat-panel>header>button>svg{
+    width: 15px;
+}
+#new-chat-panel>header>input{
+   flex: 1;
+   padding: 0;
+   border: none;
+}
+#new-chat-panel-cntnt{
+    width: 100%;
+    height: auto;
+}
+#new-chat-panel-cntnt>div{
+    width: 120px;
+    height: 120px;
+    background: url(/images/looking_for.png);
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+#new-chat-panel-cntnt>p{
+    text-align: center;
+    color: rgb(46, 42, 42);
+    padding-top: 30px;
+}
+.new-chat-panel-results{
+    cursor: pointer;
+}
+@media screen and (min-width:780px){
+    #dtPopupContainer{
+        width: 480px;
+        left: 50%;
+        transform: translateY(-100%)translateX(-50%);
+    }
+    #main-container{
+        width: 90%;
+        height: 90vh;
+        margin: auto;
+        position: relative;
+        top: 5vh;
+        background: url(/images/logo.png);
+        background-repeat: no-repeat;
+        background-position: 77%;
+        background-color: rgb(241, 239, 239);
+    }
+ #sub-container{
+     width:50%;
+ }
+ 
+}
+@media screen and (min-width:480px){
+#work_late_svg{
+    width: auto;
+    height: 50%;
+}
+}

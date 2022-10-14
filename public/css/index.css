@@ -1,0 +1,61 @@
+body{
+    background:url(/images/bk.png);
+    background-repeat: no-repeat;
+}
+@media screen and (min-width:480px){
+    body{
+        background-size: 300vh;
+    }
+}
+#container{
+    width: 80%;
+    max-width: 300px;
+    height:auto;
+    padding: 30px 10px;
+    position: absolute;
+    top:45%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    background: white;
+    border-radius: 10px;
+
+}
+#container>form>input{
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+    border:none;
+    box-shadow: -4px 4px 4px -3px gray;
+}
+#container>form>button{
+    display: block;
+    margin: 10px auto;
+    width: 80px;
+    font-weight: bold;
+    box-shadow: -4px 4px 4px -3px gray;
+}
+#container>form>button:hover{
+    background: black;
+    color: white;
+}
+#container>p>a{
+    font-weight: bold;
+    color:crimson ;
+    font-style: italic;
+}
+#logo{
+    height:50px;
+    width: 50px;
+    background: url(/images/logo.png);
+    background-size: cover;
+    position: absolute;
+    top:-25px;
+    left:50%;
+    transform:translateX(-50%);
+}
+.msg{
+    color: goldenrod;
+    font-weight: bold;
+    font-size: 13px;
+    margin-left: 20px;
+}

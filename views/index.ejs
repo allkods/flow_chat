@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('extra/head') %>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<style>
+</style>
+<body>
+    <div id="container">
+        <div id="logo"></div>
+        <ul>
+            <%
+              if(success_msg !=''){
+             %>
+             <li class="success_msg"><%= success_msg%></li>
+             <%
+              }
+             if(error !=''){
+            %>
+            <li class="error_msg"><%= error%></li>
+            <%
+             }
+            %>
+        </ul>
+
+            <form action="/" method="POST">
+                <input type="text" name="email" placeholder="Email" />
+                <p class="msg"></p>
+                <input type="password" name="password" placeholder="password" />
+                <p class="msg"></p>
+                <button type="submit" name="submit">Log in</button>
+            </form>
+           <p>New user?<a href="/signup">  Sign up</a></p>
+    </div>
+</body>
+</html>

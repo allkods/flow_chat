@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('extra/head') %>
+    <link rel="stylesheet" href="/css/chat.css">
+    <script>
+        const user={
+            id:'<%= user.id %>',
+            name:'<%= user.name %>',
+            imgid:'<%= user.imgid %>',
+            gender:'<%= user.gender %>'
+        }
+        var currentMyLogo='';
+        if(user.imgid!='')
+            currentMyLogo="/images/dp/"+user.imgid;
+            else{
+                if(user.gender=='male')
+                currentMyLogo="/images/dp/default_male.jpg";
+                else
+                currentMyLogo="/images/dp/default_female.jpg";
+            }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+</head>
+<body><% function getDate(data){
+    var date=new Date(data);
+    date=date.getFullYear()+'-'+date.getMonth()+1+'-'+date.getDate()+' '+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+    return date;
+    } %>
+    <div id="main-container">
+        <div id="dtPopupContainer">
+            
+        </div>
+        <div id="sub-container">
+        <div id="home">
+            <header>
+                <h3>FLOW CHAT</h3><h1 id="menu-btn" onclick="menuToggle()">...</h1>
+                <div id="menuContainer">
+                <div id="menuHide" onclick="menuToggle()"></div>
+                <div id="menu">
+                    <ul>
+                        <a href="/logout"><li>Logout</li></a>
+                    </ul>
+                </div>
+                </div>
+               <!-- <div id="home-search">
+                    <input type="text" name="search" placeholder="Search chat" id="home-search">
+                    <button></button>
+                </div>-->
+                    <ul id="menu-switcher">
+                        <li>CHATS</li>
+                        <li>ACTIVE</li>
+                    </ul>
+                    <div id="menu-switcher-slider"></div>
+                    <div id="new-chat-panel">
+                        <header>
+                            <button><%- include('extra/left_arrow') %></button>
+                            <input type="text" id="new-chat-search" placeholder="Search by name or Email....">
+                        </header>
+                        <div id="new-chat-panel-cntnt">
+                            <div></div>
+                        </div>
+                    </div>
+            </header>
+            <div id="room-container">
+            <div id="rooms">
+                <div id="after-room">
+                    <% if(chatrooms.length>0){ %>
+                    <% for(var i=0;i<chatrooms.length;i++){
+                         %>
+                         <div class="room-tile">
+                            <% if(chatusers[i].imgid !='' && chatusers[i].imgid !=null && chatusers[i].imgid !='undefined') { %>
+                                <div class="room-logo" style="background-image: url('/images/dp/<%= chatusers[i].imgid%>');background-size: cover;"></div>
+                            <% } %>
+                            <button class="room-detail" value="<%= chatrooms[i].id%>" id="<%= chatrooms[i].id%>" onclick="tile_click(this)">
+                                <b><%= chatusers[i].name%></b>
+                                <i><%= getDate(chatrooms[i].last_msg.date) %></i>
+                                <h4><%= chatrooms[i].last_msg.message %></h4>
+                            </button>
+                                <input type="button" class="noOfMsg" value="<%= unread[i]%>">
+                                                       
+                        </div>
+                         <%
+                    } %>
+                    <% }else{ %> <%- include('extra/work_late') %><h4>Click on the Plus button to start a new chat</h4> <% } %>
+                </div>
+                <button id="new-chat-btn" onclick="newChatBtn()">&#10010</button>
+            </div>
+            <div id="active">
+                <p>No user is active</p>
+            </div>
+            </div>
+        </div>
+        <div id="chat">
+            <header>
+                <button id="back"><%- include('extra/left_arrow') %></button>
+                <div id="chatPnlLogo" class="room-logo"></div>
+                <div id="details"><h4></h4></div>
+            </header>
+            <div id="chatContent">
+                <button id="default-cntnt">Your Chats Displays Here</button>             
+            </div>
+            <button id="typing-popup"></button> 
+            <div id="controllers">
+                    <form id="msgForm">
+                    <input type="text" name="msg" id="msg" placeholder="Write Here....." />
+                    <div id="dtbutton"><%- include('extra/drawtg') %></div>
+                    <button type="submit" name="submit" id="submit"><%- include('extra/left_arrow') %></button>
+                    </form>
+            </div>
+            <div id="draw">
+               <!-- <header>
+                    <div id="dhContainer">
+                        <button id="canvas_close" class="Close">Close</button>
+                        <button id="canvasClear">Erase</button>
+                        <button id="cmToggle">&#8660;</button>
+                    </div>
+                </header>-->
+                <canvas width="400" height="1000" id="canvas"></canvas>
+                <div id="cMenuBtn">
+                    <div id="WhiteDot"></div>
+                    <div id="chargeContainer">
+                        <button id="takeCharge">Take charge</button>
+                        <button id="passCharge">Pass</button>
+                    </div>
+                    <div id="colorContainer">
+                        <h4>Colors</h4>
+                        <div><input type="radio" name="color" value="goldenrod"><div style="background:goldenrod"></div></div>
+                        <div><input type="radio" name="color" value="crimson"><div style="background:crimson"></div></div>
+                        <div><input type="radio" name="color" value="indigo"><div style="background:indigo"></div></div>
+                        <div><input type="radio" name="color" value="black" checked><div style="background:black"></div></div>
+                        <div><input type="radio" name="color" value="skyblue"><div style="background:rgb(21, 161, 216)"></div></div>
+                        <div><input type="radio" name="color" value="orangered"><div style="background:orangered"></div></div>
+                        <div><input type="radio" name="color" value="green"><div style="background:green"></div></div>
+                    </div>
+                    <div id="sizeContainer">
+                        <h4>Stroke Size</h4>
+                        <input type="range" name="size" id="strokeSize" min="1" max="10" value="6">
+                    </div>
+                    <div id="canvasBtnContainer">
+                        <button id="canvas_close" class="Close">Close</button>
+                        <button id="canvasClear">Erase</button>
+                    </div>
+                </div>
+                <div id="cTutorial">
+                    <div>
+                        <%- include('extra/cTut1') %> <p>Click on this button to open menu and click back to close menu.</p>
+                    </div>
+                    <div>
+                        <%- include('extra/cTut2') %>
+                        <p>You must click on <b>Take charge</b> to start drawing.As soon as you are in charge, the white dot turns blue.<br><br>
+                        Only the person who is in charge can draw at a particualar time.<br><br>
+                        If the person on the other side takes charge then, your charge will be automatically snached, Or you can click on <b>Pass</b>, to pass the charge to other end and let the user at other end to draw.</p>
+                    </div>
+                    <div>
+                        <%- include('extra/cTut3') %>
+                        <p>You can select different colors and size.</p>
+                    </div>
+                    <div>
+                        <%- include('extra/cTut4') %>
+                        <p>Click on <b>Erase</b> to clear screen and <b>Close</b> to exit drawing.</p>
+                    </div>
+                    <div>
+                        <button id="tutorialOK">OK</button>
+                    </div>
+                </div>
+            </div>
+            <div id="drawMsg">
+                <button id="drawMsg_close" class="Close">&#10006</button>
+                <div>
+                    <h1></h1>
+                    <h4></h4>
+                    <h5></h5>
+                </div>
+            </div>
+         </div>
+    </div>
+
+    </div>
+    
+    <audio hidden id="popUpTone">
+        <source src="/audio/message.mp3" type="audio/mp3">
+    </audio>
+    <script src="/javascript/chat.js"></script>
+</body>
+</html>

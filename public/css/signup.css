@@ -1,0 +1,133 @@
+body{
+    background:url(/images/bk.png);
+    background-repeat: no-repeat;
+    
+}
+
+#container{
+    width: 80%;
+    max-width: 300px;
+    height:auto;
+    padding: 30px 10px;
+    position: absolute;
+    top:10%;
+    left:50%;
+    transform: translateX(-50%);
+    background: white;
+    border-radius: 10px;
+
+}
+#container>form>input[type=text],input[type=password]{
+    display: block;
+    margin: 10px auto;
+    width: 90%;
+    border:none;
+    box-shadow: -4px 4px 4px -3px gray;
+}
+#container>form>button{
+    display: block;
+    margin: 10px auto;
+    width: 80px;
+    font-weight: bold;
+    box-shadow: -4px 4px 4px -3px gray;
+}
+#container>form>button:hover{
+    background: black;
+    color: white;
+}
+#container>form>a{
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    width: 150px;
+    color:green ;
+}
+#logo{
+    height:50px;
+    width: 50px;
+    background:url(/images/logo.png);
+    background-size: cover;
+    position: absolute;
+    top:-25px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+
+
+#updateDp{
+    margin:30px 0 0 0;
+    background: indigo;
+}
+.heading{
+    color: rgb(255, 255, 255);
+    padding: 10px 0;
+    text-align: center;
+}
+#virtual{
+    height: 150px;
+    width: 150px;
+    background-color: transparent;
+    border-radius: 50%;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    animation: pop 2000ms ease infinite;
+    border: 5px solid white;
+}
+@keyframes pop{
+    0%{
+        transform: scale(.9);
+    }
+    50%{
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(.9);
+    }
+    
+}
+#virtual-logo{
+    position: absolute;
+    cursor: pointer;
+}
+#virtual-logo{
+    background: transparent;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    width: 100%;
+}
+
+#continue{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 15px 0;
+    padding: 5px 15px;
+    border: 2px solid black;
+    font-weight: bold;
+}
+#continue:hover{
+    background: black;
+    color: white;
+}
+#msgbtn{
+    position: relative;
+    width: 100%;
+    text-align: center;
+    background-color: goldenrod;
+    color: white;
+    font-weight: bold;
+}
+@media screen and (min-width:480px){
+    body{
+        background-size: 300vh;
+    }
+}
+@media screen and (min-width:780px){
+    #container{
+        top:20%;
+    }
+}

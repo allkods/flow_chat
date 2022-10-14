@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('extra/head') %>
+  <link rel="stylesheet" href="/css/signup.css">
+</head>
+<style>
+</style>
+<body>
+    <div id="container">
+      <div id="logo"></div>
+      <ul>
+      <% if(typeof error_msg !='undefined'){
+         error_msg.forEach(data =>{ %>
+           <li class="error_msg"><%= data.msg %></li><br>
+       <% })
+      } %>
+      </ul>
+      <form action="/signup" method="POST" enctype="multipart/form-data" id="form">
+        <input type="text" name="email" placeholder="Email" <%if(typeof email!='undefined'){%> value="<%= email%>" <%}%> />
+        <p class="msg"></p>
+        <input type="text" name="name" placeholder="Name" <%if(typeof name!='undefined'){%> value="<%= name%>" <%}%>>
+        <p class="msg"></p>
+        <input type="password" name="password" placeholder="Password">
+        <p class="msg"></p>
+        <input type="password" name="cpassword" placeholder="Confirm Password" />
+        <p class="msg"></p>
+        <label for="male">Male</label><input type="radio" name="gender" id="male" value="male" checked />
+        <label for="female">Female</label><input type="radio" name="gender" id="female" value="female" />
+        <div id="updateDp">
+            <h2 class="heading">This is how you will appear....!</h2>
+            <div id="virtual">    
+              <img src="" alt="" id="virtual-logo">
+            </div>
+            <button type="submit" id="continue">Continue</button>
+        </div>
+      </form>
+     
+      
+   </div>
+   <script>
+$(function(){
+  var submitTimes=1;
+  $('#form').on('submit',function(e){
+    e.preventDefault();
+    if(submitTimes===1){
+      document.getElementById('form').submit();
+      submitTimes++;
+    }    
+  });
+  if(document.getElementById('female').checked)
+  $('#virtual-logo').attr('src','/images/dp/default_female.jpg');
+  if(document.getElementById('male').checked)
+  $('#virtual-logo').attr('src','/images/dp/default_male.jpg');
+  $('#female').on('change',function(){
+    if(document.getElementById('female').checked)
+  $('#virtual-logo').attr('src','/images/dp/default_female.jpg');
+  });
+  $('#male').on('change',function(){
+    if(document.getElementById('male').checked)
+  $('#virtual-logo').attr('src','/images/dp/default_male.jpg');
+});
+
+});
+ 
+   </script>
+</body>
+</html>
